@@ -1,0 +1,11 @@
+{
+  "routes": [
+    { "slug": "flights-from-san-francisco-to-tokyo", "label": "SFO → Tokyo" },
+    { "slug": "flights-from-tokyo-to-san-francisco", "label": "Tokyo → SFO" },
+    { "slug": "flights-from-san-jose-to-tokyo", "label": "SJC → Tokyo" },
+    { "slug": "flights-from-tokyo-to-san-jose", "label": "Tokyo → SJC" }
+  ],
+  "thresholds": { "ONE_WAY": 400, "ROUND_TRIP": 700 },
+  "travel_month": "2026-11",
+  "request_pause_seconds": 2
+}

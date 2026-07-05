@@ -1,0 +1,2 @@
+# zipair_monitor.py uses only the Python standard library — no third-party deps.
+# This file is intentionally empty so `pip install -r requirements.txt` is a no-op.

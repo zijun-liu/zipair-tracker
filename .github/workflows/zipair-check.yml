@@ -1,0 +1,45 @@
+name: ZIPAIR fare check
+
+# Runs on a schedule AND on external trigger (cron-job.org via workflow_dispatch).
+# GitHub's own cron is throttled and can fire hours late, so the schedule below is
+# only a backup — use cron-job.org for a dependable cadence (see README).
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"   # backup: every 6 hours (UTC)
+
+permissions:
+  contents: write            # allow the job to commit updated state.json
+
+concurrency:
+  group: zipair-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check ZIPAIR fares
+        env:
+          ZIPAIR_SMTP_USER: ${{ secrets.ZIPAIR_SMTP_USER }}
+          ZIPAIR_SMTP_PASS: ${{ secrets.ZIPAIR_SMTP_PASS }}
+          ZIPAIR_MAIL_TO: ${{ secrets.ZIPAIR_MAIL_TO }}
+        run: python3 zipair_monitor.py
+
+      - name: Commit state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet state.json; then
+            git add state.json
+            git commit -m "Update fare state [skip ci]"
+            git push
+          else
+            echo "No state change."
+          fi
