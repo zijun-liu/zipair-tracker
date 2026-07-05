@@ -6,18 +6,22 @@ round-trip under **$800** by default, focused on **November 2026** travel. Runs 
 the cloud around the clock; your computer can be off.
 
 Modeled on [matcha-alert](https://github.com/zijun-liu/matcha-alert): a small
-Python checker driven by GitHub Actions, pinged by cron-job.org, emailing over
-Gmail and committing its state back to the repo so you never get the same alert
-twice.
+Python checker driven by GitHub Actions, emailing over Gmail and committing its
+state back to the repo so you never get the same alert twice.
 
 ## How it works
 
 ```
-cron-job.org  ──every 30 min──▶  GitHub Actions workflow  ──runs──▶  zipair_monitor.py
-(free pinger)                    (zipair-check.yml)                  checks ZIPAIR fares,
-                                                                     emails on new deals,
-                                                                     commits state.json
+GitHub Actions cron  ──every 12 h──▶  zipair_monitor.py
+(zipair-check.yml)                    checks ZIPAIR fares,
+                                      emails on new deals,
+                                      commits state.json
 ```
+
+GitHub throttles scheduled workflows, so a run can fire late — harmless at a
+12-hour cadence. Note GitHub disables schedules after ~60 days without repo
+activity; the state commits normally keep it alive, but if you pause the
+tracker for months, re-enable it from the Actions tab.
 
 - `zipair_monitor.py` fetches ZIPAIR's own fare pages at `flights.zipair.net`
   (e.g. *flights-from-san-francisco-to-tokyo*), reads the fares embedded in each
@@ -60,16 +64,7 @@ Two honest caveats:
    - `ZIPAIR_SMTP_USER` — your Gmail address
    - `ZIPAIR_SMTP_PASS` — the 16-character app password
    - `ZIPAIR_MAIL_TO` — where alerts go (comma-separated for multiple)
-3. **Pinger** — create a
-   [fine-grained token](https://github.com/settings/personal-access-tokens/new)
-   scoped to this repo with **Actions: Read and write**, then on
-   [cron-job.org](https://cron-job.org) create a job:
-   - URL: `https://api.github.com/repos/<you>/zipair-tracker/actions/workflows/zipair-check.yml/dispatches`
-   - Schedule: every 30 minutes · Method: `POST` · Body: `{"ref":"main"}`
-   - Headers: `Authorization: Bearer <token>`, `Accept: application/vnd.github+json`,
-     `Content-Type: application/json`
-   - A test run returning **204** means it works.
-4. **Verify** — the *Actions* tab should show runs on schedule. Use
+3. **Verify** — the *Actions* tab should show runs every 12 hours. Use
    *Run workflow* to trigger one by hand, and `--test-email` (below) to confirm
    delivery.
 
@@ -115,4 +110,4 @@ No third-party packages — standard library only (`requirements.txt` is empty).
 | `zipair_monitor.py` | The checker/emailer. |
 | `config.json` | Routes, thresholds, target month. Editable. |
 | `state.json` | Last known fares + what's been alerted; auto-committed by the workflow. |
-| `.github/workflows/zipair-check.yml` | The Actions workflow (dispatch-driven + 6-hour backup cron). |
+| `.github/workflows/zipair-check.yml` | The Actions workflow (12-hour cron + manual dispatch). |

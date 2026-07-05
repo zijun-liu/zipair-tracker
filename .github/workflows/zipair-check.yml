@@ -1,12 +1,12 @@
 name: ZIPAIR fare check
 
-# Runs on a schedule AND on external trigger (cron-job.org via workflow_dispatch).
-# GitHub's own cron is throttled and can fire hours late, so the schedule below is
-# only a backup — use cron-job.org for a dependable cadence (see README).
+# Runs every 12 hours via GitHub's cron (may fire late — GitHub throttles
+# scheduled workflows, but at this cadence that's fine). workflow_dispatch
+# stays available for manual runs from the Actions tab.
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 */6 * * *"   # backup: every 6 hours (UTC)
+    - cron: "0 */12 * * *"   # every 12 hours (UTC)
 
 permissions:
   contents: write            # allow the job to commit updated state.json
