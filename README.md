@@ -2,7 +2,7 @@
 
 Watches ZIPAIR's published fares for **San Francisco ⇄ Tokyo** (both directions)
 and **emails you when a fare drops below your threshold** — one-way under **$400**,
-round-trip under **$700** by default, focused on **November 2026** travel. Runs in
+round-trip under **$800** by default, focused on **November 2026** travel. Runs in
 the cloud around the clock; your computer can be off.
 
 Modeled on [matcha-alert](https://github.com/zijun-liu/matcha-alert): a small
@@ -85,7 +85,7 @@ Two honest caveats:
     { "slug": "flights-from-san-jose-to-tokyo",      "label": "SJC → Tokyo" },
     { "slug": "flights-from-tokyo-to-san-jose",      "label": "Tokyo → SJC" }
   ],
-  "thresholds": { "ONE_WAY": 400, "ROUND_TRIP": 700 },
+  "thresholds": { "ONE_WAY": 400, "ROUND_TRIP": 800 },
   "travel_month": "2026-11",
   "request_pause_seconds": 2
 }

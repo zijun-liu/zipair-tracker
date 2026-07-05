@@ -82,7 +82,7 @@ DEFAULT_CONFIG = {
     # A fare triggers an alert when its USD total is below the threshold for its
     # flight type. One-way keeps the original $400 target; round-trip defaults to
     # a level below ZIPAIR's usual SFO<->Tokyo low so real dips fire. Edit freely.
-    "thresholds": {"ONE_WAY": 400, "ROUND_TRIP": 700},
+    "thresholds": {"ONE_WAY": 400, "ROUND_TRIP": 800},
     # If set (e.g. "2026-11"), a fare must also depart in that month to alert.
     # Set to null to alert on any date.
     "travel_month": "2026-11",
