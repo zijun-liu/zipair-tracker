@@ -1,14 +1,14 @@
 {
   "alerted": {},
-  "last_run": "2026-07-06T03:28:19.374057+00:00",
+  "last_run": "2026-07-06T15:31:04.736949+00:00",
   "last_cheapest": {
-    "usd": 773.27,
-    "route": "SFO → Tokyo",
-    "origin": "SFO",
-    "destination": "NRT",
+    "usd": 746.22,
+    "route": "Tokyo → SJC",
+    "origin": "NRT",
+    "destination": "SJC",
     "flight_type": "ROUND_TRIP",
-    "departure_date": "2026-07-11",
-    "return_date": "2027-01-20",
-    "formatted_price": "USD 774"
+    "departure_date": "2026-07-14",
+    "return_date": "2026-07-19",
+    "formatted_price": "121,014JPY"
   }
 }
