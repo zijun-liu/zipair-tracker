@@ -1,14 +1,14 @@
 {
   "alerted": {},
-  "last_run": "2026-07-08T02:36:26.207980+00:00",
+  "last_run": "2026-07-08T14:04:04.263715+00:00",
   "last_cheapest": {
-    "usd": 670.7,
+    "usd": 670.6,
     "route": "Tokyo → SJC",
     "origin": "NRT",
     "destination": "SJC",
     "flight_type": "ROUND_TRIP",
-    "departure_date": "2026-07-14",
+    "departure_date": "2026-07-11",
     "return_date": "2026-08-11",
-    "formatted_price": "108,704JPY"
+    "formatted_price": "108,879JPY"
   }
 }
