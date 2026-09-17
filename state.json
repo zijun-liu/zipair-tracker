@@ -1,14 +1,14 @@
 {
   "alerted": {},
-  "last_run": "2026-09-09T03:15:48.296224+00:00",
+  "last_run": "2026-09-17T16:18:36.960289+00:00",
   "last_cheapest": {
-    "usd": 876.67,
+    "usd": 784.24,
     "route": "SFO → Tokyo",
     "origin": "SFO",
     "destination": "NRT",
     "flight_type": "ROUND_TRIP",
-    "departure_date": "2026-10-18",
-    "return_date": "2026-11-05",
-    "formatted_price": "USD 877"
+    "departure_date": "2026-10-14",
+    "return_date": "2026-10-28",
+    "formatted_price": "USD 785"
   }
 }
